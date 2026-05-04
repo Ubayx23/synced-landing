@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
-import { BottomPillNav } from "@/components/nav/BottomPillNav";
 import { TallyScript } from "@/components/tally/TallyScript";
 import { WaitlistListener } from "@/components/tally/WaitlistListener";
 import "./globals.css";
@@ -50,7 +49,6 @@ export default function RootLayout({
           className="pointer-events-none fixed inset-0 -z-10 syn-ambient-halo"
         />
         <main>{children}</main>
-        <BottomPillNav />
         <TallyScript />
         <WaitlistListener />
       </body>
