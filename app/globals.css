@@ -1,0 +1,107 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --syn-bg: #0a0a0a;
+    --syn-bg-deep: #050505;
+    --syn-surface: #161618;
+    --syn-surface-hi: #1f1f23;
+    --syn-border: #2a2a2e;
+    --syn-text: #ffffff;
+    --syn-text-dim: #8e8e93;
+    --syn-text-faint: #5a5a60;
+    --syn-cyan: #00e5ff;
+    --syn-cyan-soft: #7ce8f5;
+    --syn-cyan-glow: rgba(0, 229, 255, 0.18);
+    --syn-green: #22c55e;
+
+    --syn-r-button: 14px;
+    --syn-r-card: 16px;
+    --syn-r-pill: 999px;
+
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --card: 240 3% 9%;
+    --card-foreground: 0 0% 100%;
+    --popover: 240 3% 9%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 187 100% 50%;
+    --primary-foreground: 0 0% 4%;
+    --secondary: 240 3% 14%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 3% 14%;
+    --muted-foreground: 240 4% 60%;
+    --accent: 240 3% 14%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 100% 61%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 240 3% 17%;
+    --input: 240 3% 17%;
+    --ring: 187 100% 50%;
+    --radius: 14px;
+  }
+
+  * {
+    border-color: hsl(var(--border));
+  }
+
+  html,
+  body {
+    background: var(--syn-bg);
+    color: var(--syn-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    min-height: 100svh;
+    overflow-x: hidden;
+  }
+}
+
+@layer utilities {
+  .syn-vignette {
+    background:
+      radial-gradient(
+        1200px 700px at 50% 0%,
+        #161616 0%,
+        var(--syn-bg) 55%,
+        var(--syn-bg-deep) 100%
+      );
+  }
+
+  .syn-ambient-halo {
+    background: radial-gradient(
+      circle at 50% 18%,
+      rgba(0, 229, 255, 0.08),
+      transparent 60%
+    );
+  }
+
+  .syn-cta-glow {
+    box-shadow: 0 8px 16px rgba(0, 229, 255, 0.35);
+  }
+
+  .syn-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .syn-tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
