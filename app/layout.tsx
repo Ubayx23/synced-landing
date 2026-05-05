@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { TallyScript } from "@/components/tally/TallyScript";
 import { WaitlistListener } from "@/components/tally/WaitlistListener";
+import { CookieConsent } from "@/components/CookieConsent";
 import "./globals.css";
 
 const inter = Inter({
@@ -40,17 +41,10 @@ export default function RootLayout({
   return (
     <html lang="en" className={`dark ${inter.variable}`}>
       <body className="font-sans antialiased">
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 syn-vignette"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none fixed inset-0 -z-10 syn-ambient-halo"
-        />
         <main>{children}</main>
         <TallyScript />
         <WaitlistListener />
+        <CookieConsent />
       </body>
     </html>
   );

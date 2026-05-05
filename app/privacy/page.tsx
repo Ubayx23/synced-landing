@@ -1,16 +1,95 @@
-export const metadata = { title: "Privacy. Synced." };
+import Link from "next/link";
+
+export const metadata = {
+  title: "Privacy Policy. Synced.",
+  description:
+    "How Synced handles your information. Pre-launch waitlist, kept simple.",
+};
 
 export default function PrivacyPage() {
   return (
-    <section className="mx-auto max-w-2xl px-6 py-24">
-      <h1 className="text-3xl font-bold tracking-display text-syn-text">
-        Privacy
+    <main className="mx-auto max-w-2xl px-6 py-24 text-syn-text">
+      <Link
+        href="/"
+        className="text-xs font-semibold uppercase tracking-widest text-syn-cyan hover:underline"
+      >
+        ← Back to home
+      </Link>
+
+      <h1 className="mt-6 text-4xl font-bold tracking-display">
+        Privacy Policy
       </h1>
-      <p className="mt-6 text-syn-text-dim">
-        Privacy policy coming soon. In the meantime, the only data we collect
-        is the email address you submit to the waitlist, used solely to notify
-        you at launch.
+      <p className="mt-2 text-sm text-syn-text-faint">
+        Last updated 4 May 2026.
       </p>
-    </section>
+
+      <section className="mt-10 space-y-6 text-syn-text-dim leading-relaxed">
+        <p>
+          Synced is a one-person, pre-launch project. This policy covers
+          synced.page (the marketing site) and the iOS app, which is not yet
+          publicly available.
+        </p>
+
+        <h2 className="pt-4 text-xl font-semibold text-syn-text">
+          What we collect
+        </h2>
+        <p>
+          On the marketing site we collect only the information you submit to
+          the waitlist form: typically an email address and any optional fields
+          you choose to fill in. The form is hosted by Tally, which acts as the
+          processor on our behalf. We do not run third-party analytics,
+          advertising trackers, or session recorders on synced.page.
+        </p>
+        <p>
+          The iOS app, when it launches, will store your fuel and training logs
+          locally on your device by default. Any data that syncs off-device for
+          backup or analysis will be tied to a user account you create, and
+          will be covered by an updated version of this policy at that time.
+        </p>
+
+        <h2 className="pt-4 text-xl font-semibold text-syn-text">
+          How we use it
+        </h2>
+        <p>
+          Your waitlist email is used to contact you about the launch, beta
+          invites, and major product news. Nothing else. We do not sell, rent,
+          or share waitlist contacts.
+        </p>
+
+        <h2 className="pt-4 text-xl font-semibold text-syn-text">
+          Your choices
+        </h2>
+        <p>
+          You can ask to be removed from the waitlist at any time by emailing
+          the address below. We will delete your record within a reasonable
+          window and confirm by reply.
+        </p>
+
+        <h2 className="pt-4 text-xl font-semibold text-syn-text">
+          Cookies
+        </h2>
+        <p>
+          synced.page uses two small pieces of local storage:{" "}
+          <code className="text-syn-cyan">synced_waitlist_submitted</code> to
+          remember whether you have already joined the waitlist on this
+          browser, and{" "}
+          <code className="text-syn-cyan">synced_cookie_consent</code> to
+          remember that you have dismissed the cookie banner. No other cookies
+          or tracking storage are set by us.
+        </p>
+
+        <h2 className="pt-4 text-xl font-semibold text-syn-text">Contact</h2>
+        <p>
+          Questions, requests, or anything privacy-related, write to{" "}
+          <a
+            className="text-syn-cyan hover:underline"
+            href="mailto:ubaydullanoorullah@gmail.com"
+          >
+            ubaydullanoorullah@gmail.com
+          </a>
+          .
+        </p>
+      </section>
+    </main>
   );
 }

@@ -1,15 +1,11 @@
-import { Hero } from "@/components/sections/Hero";
-import { Wedge } from "@/components/sections/Wedge";
-import { FoundingMembers } from "@/components/sections/FoundingMembers";
-import { Footer } from "@/components/sections/Footer";
+import { Component as Hero } from "@/components/ui/hero";
+import { SyncedFooter } from "@/components/ui/motion-footer";
 
 export default function Page() {
   return (
-    <>
+    <div className="w-full min-h-screen">
       <Hero />
-      <Wedge />
-      <FoundingMembers />
-      <Footer />
-    </>
+      <SyncedFooter />
+    </div>
   );
 }
