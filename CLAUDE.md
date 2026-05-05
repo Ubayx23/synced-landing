@@ -1,104 +1,139 @@
 # Synced.page — Landing site
 
-Single-page Next.js 14 (App Router) landing for **Synced**, a pre-launch iOS recovery/readiness tracker. The wedge: linking pre-workout fuel to in-workout performance.
+Single-page Next.js 14 (App Router) landing for **Synced**, a pre-launch iOS training tracker. The wedge: linking pre-workout fuel to in-workout performance.
 
-The site exists to (a) establish the dark/cyan brand that mirrors the iOS app and (b) drive waitlist signups via a Tally popup (form id `44PkRA`).
+The site exists to (a) establish the dark/teal brand and (b) drive waitlist signups via a Tally popup (form id `44PkRA`).
 
 ## Stack
 
 - Next.js 14.2 App Router, React 18, TypeScript.
 - Tailwind 3.4 with CSS-variable design tokens (see `app/globals.css` and `tailwind.config.ts`).
-- shadcn/ui primitives in `components/ui/`.
+- `motion` (Framer Motion) for hero entrance animations.
+- `gsap` + `ScrollTrigger` for the cinematic footer (parallax giant text, magnetic pills, scroll-driven reveal).
+- shadcn-token aliases for the footer's `color-mix(in oklch, ...)` calls. The shadcn Button primitive is kept in `components/ui/button.tsx` even though nothing imports it today.
 - Tally embed.js loaded via `next/script` (`components/tally/TallyScript.tsx`).
-- `motion` (Framer Motion) and lucide-react are installed.
-- No backend, no analytics, no images shipped — favicon/OG come from `app/icon.tsx` and `app/opengraph-image.tsx` via `next/og`.
+- No backend, no analytics, no images shipped — favicon and OG come from `app/icon.tsx` and `app/opengraph-image.tsx` via `next/og`.
 
 ## Run
 
 ```
 npm install
-npm run dev          # http://localhost:3000
+npm run dev          # http://localhost:3000 (or 3001 if 3000 is taken)
 npm run build
 npm run lint         # next lint + lint:no-emdash
 ```
 
-`lint:no-emdash` greps `app components lib` for `—` (em dash) and fails the lint if any are found. Use `.` or `,` instead.
+`lint:no-emdash` greps `app components lib` for `—` (em dash) and fails if any are found. Use `.` or `,` instead. This is a hard rule.
 
-## Design tokens — source of truth
+## Optional: viewport screenshots
 
-CSS variables in `app/globals.css` mirror the iOS `Tokens.swift` 1:1. Use the Tailwind aliases, not raw hex:
-
-| Tailwind | CSS var | Hex |
-|---|---|---|
-| `bg-syn-bg` | `--syn-bg` | `#0A0A0A` |
-| `bg-syn-bg-deep` | `--syn-bg-deep` | `#050505` |
-| `bg-syn-surface` | `--syn-surface` | `#161618` |
-| `bg-syn-surface-hi` | `--syn-surface-hi` | `#1F1F23` |
-| `border-syn-border` | `--syn-border` | `#2A2A2E` |
-| `text-syn-text` | `--syn-text` | `#FFFFFF` |
-| `text-syn-text-dim` | `--syn-text-dim` | `#8E8E93` |
-| `text-syn-text-faint` | `--syn-text-faint` | `#5A5A60` |
-| `text-syn-cyan` / `bg-syn-cyan` | `--syn-cyan` | `#00E5FF` |
-| `text-syn-cyan-soft` | `--syn-cyan-soft` | `#7CE8F5` |
-| radius `rounded-syn-button` | 14px |
-| radius `rounded-syn-card` | 16px |
-| radius `rounded-syn-pill` | 999px |
-
-Letter-spacing presets: `tracking-wordmark` (-0.04em) for the logo, `tracking-display` (-0.03em) for headlines.
-
-Globals also expose two background utilities mounted once in `app/layout.tsx`:
-- `.syn-vignette` — radial dark vignette anchored top-center.
-- `.syn-ambient-halo` — faint cyan halo at (50%, 18%).
-- `.syn-cta-glow` — cyan drop shadow for primary buttons.
-
-## File map
+`scripts/shoot.mjs` uses Puppeteer to capture `iphone-se` (375), `iphone-14` (390), and `desktop` (1280) screenshots into `/tmp/synced-*.png`. Puppeteer is intentionally not in `package.json`. To use:
 
 ```
-app/
-  layout.tsx              <html class="dark">, Inter, vignette + halo, mounts TallyScript, WaitlistListener
-  page.tsx                composes 4 sections: Hero, Wedge, FoundingMembers, Footer
-  globals.css             tokens, vignette/halo/cta-glow utilities, prefers-reduced-motion override
-  icon.tsx                32x32 favicon: cyan dot on #0A0A0A
-  opengraph-image.tsx     1200x630 OG card
-  privacy/page.tsx        stub
-  terms/page.tsx          stub
-
-components/
-  ui/                     shadcn: button, card, badge, separator, tooltip
-  sections/               Hero, Wedge, FoundingMembers, Footer
-  primitives/             Wordmark, StatusPill, Eyebrow, FadeUp, WaitlistButton
-  tally/                  TallyScript (loads embed.js), WaitlistListener (postMessage -> markSubmitted)
-
-lib/
-  cn.ts                   clsx + tailwind-merge
-  tally.ts                openWaitlist() — guarded by hasSubmitted()
-  waitlist.ts             STORAGE_KEY, markSubmitted(), hasSubmitted(), useWaitlistSubmitted()
-
-hooks/useInView.ts        IntersectionObserver hook used by FadeUp
-types/tally.d.ts          window.Tally typing
+npm install --no-save puppeteer
+npm run dev &
+node scripts/shoot.mjs
 ```
+
+## Page composition
+
+```
+app/layout.tsx              <html class="dark">, Inter, mounts TallyScript, WaitlistListener, CookieConsent
+app/page.tsx                <Hero /> + <SyncedFooter /> only
+```
+
+The hero is `components/ui/hero.tsx`. The footer is `components/ui/motion-footer.tsx`.
+
+## Hero shape
+
+- Top nav: `synced.` wordmark on the left, `iPhone only` glass pill (Apple SVG + label) on the right. No nav links, no top-right Join waitlist button.
+- Three-line headline `FUEL.` / `TRAIN.` / `DECODE.` (DECODE in teal). Staggered indents on `md+`, all centered on mobile. Floor sizes are tuned so the text never crops at 375px.
+- 3D drop-shadow on the headline scales by viewport: 6 layers on mobile, 14 layers on desktop, switched via styled-jsx `@media (min-width: 768px)` against the `.syn-headline` class.
+- Subheadline below DECODE: "You've been training without the data that actually matters." Constrained to `max-w-[300px]` on mobile, `md:max-w-[540px]`.
+- Two decorative cyan squiggle arrows + the spinning "JOIN THE WAITLIST" circular badge are **desktop-only** (`hidden md:block`). On mobile, a solid teal pill CTA "Join the waitlist" sits below the subheadline (`md:hidden`).
+- Bottom of hero: three light cream/white feature cards on a rounded white slab — `LOG FUEL`, `RATE THE SESSION`, `SEE THE PATTERN`. Each card has a small dark-pill visual (food log, dot row, bar chart). Connecting black arrows between cards 1→2 and 2→3 are `hidden md:block`.
+
+Every CTA in the hero (nav has no CTA; mobile pill; desktop spinning badge) calls `openWaitlist()` from `lib/tally.ts`.
+
+## Footer shape (`SyncedFooter`)
+
+- Cinematic curtain reveal: a `clipPath`-clipped wrapper over a `position: fixed` footer that scrolls into view.
+- Aurora glow + faint grid + giant background text `SYNCED` (parallaxed via GSAP `scrollTrigger`).
+- Marquee strip: `Coming soon to iOS · Eat. Train. Decode. · iPhone only · Cohort 1 open · Built for serious training`.
+- Heading `Ready to decode?` with a metallic gradient.
+- Single magnetic glass pill `Join the waitlist` (Apple SVG, calls `openWaitlist()`), then secondary pills `Privacy Policy`, `Terms of Service`, `Support` (mailto `ubaydullanoorullah@gmail.com`). No Android pill, no "Crafted by" pill.
+- Bottom row: `© 2026 synced.page` on the left, back-to-top button on the right.
 
 ## Tally + single-submission guard
 
 - One Tally popup, form id `44PkRA`. Opened via `openWaitlist()` in `lib/tally.ts`.
 - `WaitlistListener` (mounted in `layout.tsx`) listens for `Tally.FormSubmitted` postMessages, writes `localStorage['synced_waitlist_submitted'] = '1'`, dispatches `CustomEvent('synced:waitlisted')`.
-- `useWaitlistSubmitted()` subscribes to the custom event and the cross-tab `storage` event.
-- All `<WaitlistButton>` instances flip to a disabled `you're in ✓` state when submitted; click is no-op and tooltip explains.
-- During SSR / first client render, the hook returns `false` to avoid hydration mismatch, then flips post-mount.
+- `useWaitlistSubmitted()` in `lib/waitlist.ts` subscribes to the custom event + cross-tab `storage` event.
+- The hero and footer wire raw `onClick={openWaitlist}` directly. `openWaitlist` is gated by `hasSubmitted()`, so a user who already signed up will not see the popup re-open.
+- The "you're in ✓" disabled CTA state from earlier was removed when the cinematic visuals replaced the original CTA primitives. If you need it back, reintroduce a `WaitlistButton` primitive that wraps `useWaitlistSubmitted()`.
 
 To reset locally: DevTools → Application → Local Storage → delete `synced_waitlist_submitted`.
 
+## Cookie consent
+
+- `components/CookieConsent.tsx` is a client component mounted in `app/layout.tsx`.
+- Shows a glass card pinned to `bottom-4` on first visit; dismisses with one Accept button.
+- Stores `localStorage['synced_cookie_consent'] = '1'`. Renders nothing on subsequent visits.
+- Fails silent if storage is blocked (private mode).
+
+## Design tokens
+
+`app/globals.css` exposes two parallel sets of CSS variables:
+
+- **Synced palette** (`--syn-*`): brand-specific colors and radii. Use Tailwind aliases like `bg-syn-bg`, `text-syn-text-dim`, `text-syn-cyan`, `rounded-syn-pill`.
+- **shadcn tokens** (`--background`, `--foreground`, `--primary`, `--secondary`, `--muted-foreground`, `--border`, `--destructive`, etc.): defined as **direct color values**, not `H S L` triplets. The cinematic footer uses `color-mix(in oklch, var(--foreground) 8%, transparent)` and similar — these only work with real color values. `tailwind.config.ts` exposes them as `bg-background`, `text-foreground`, `text-primary/60`, `border-border/50`, etc.
+
+If you change a token, both the `--syn-*` family and the corresponding shadcn token may need updating to keep the brand consistent across the hero (which uses `--syn-*`) and the footer (which uses shadcn tokens).
+
+## File map (current)
+
+```
+app/
+  layout.tsx              <html class="dark">, Inter, mounts TallyScript, WaitlistListener, CookieConsent
+  page.tsx                <Hero /> + <SyncedFooter />
+  globals.css             tokens (syn + shadcn), prefers-reduced-motion override
+  icon.tsx                32x32 favicon: cyan dot on dark
+  opengraph-image.tsx     1200x630 OG card
+  privacy/page.tsx        full privacy policy with contact email
+  terms/page.tsx          full terms of service with contact email
+
+components/
+  ui/
+    hero.tsx              landing hero (nav, headline, subheadline, mobile CTA, desktop badge, feature cards)
+    motion-footer.tsx     SyncedFooter — cinematic curtain footer with magnetic pills
+    button.tsx            shadcn Button primitive (kept, currently unused)
+  tally/
+    TallyScript.tsx       loads tally.so/widgets/embed.js after interactive
+    WaitlistListener.tsx  postMessage -> markSubmitted
+  CookieConsent.tsx       first-visit consent banner
+
+lib/
+  cn.ts                   clsx + tailwind-merge
+  utils.ts                re-exports cn (the cinematic footer imports @/lib/utils)
+  tally.ts                openWaitlist() — guarded by hasSubmitted()
+  waitlist.ts             STORAGE_KEY, markSubmitted(), hasSubmitted(), useWaitlistSubmitted()
+
+types/tally.d.ts          window.Tally typing
+
+scripts/shoot.mjs         optional Puppeteer screenshot helper (see Run section)
+```
+
 ## Conventions
 
-- Every CTA goes through `<WaitlistButton>`. Do not call `window.Tally` directly outside `lib/tally.ts`.
-- Do not type em dashes (`—`) in source — `lint:no-emdash` will fail. Use `.` or `,`.
-- One `<h1>` per page (in Hero). `<header>` for nav, `<main>` for sections, `<footer>` for footer. lucide icons get `aria-hidden`.
-- Dark-only. `<html class="dark">` is set in `layout.tsx`; do not add `light:` Tailwind variants.
-- Fade-up reveals are wrapped in `<FadeUp>` (IntersectionObserver, once). Above-the-fold content uses `triggerOnMount`.
+- All CTAs go through `openWaitlist()`. Do not call `window.Tally` directly outside `lib/tally.ts`.
+- No em dashes in source. `lint:no-emdash` will fail the build.
+- One `<h1>` per page (in the hero — there are three styled `<h1>` lines for FUEL/TRAIN/DECODE; this is intentional and lints clean).
+- Dark-only. `<html class="dark">` is set in `layout.tsx`.
+- Mobile-first responsive. The hero hides decorative ornament under `md` and ships a clean stacked layout on small screens. Verify any hero changes at 375px.
 - Animations sit inside `@media (prefers-reduced-motion: no-preference)` or rely on the global override in `globals.css`.
 
 ## Out of scope
 
 - No analytics, no CMS, no i18n.
-- Privacy / Terms are stubs.
-- No deploy scripts here — the user pushes to GitHub and imports into Vercel manually.
+- No deploy scripts here. The repo is hosted at `https://github.com/Ubayx23/synced-landing.git` and the user imports it into Vercel manually.
+- Stripe / founding-access purchase flow is **not yet wired**; only the Tally waitlist is live.
