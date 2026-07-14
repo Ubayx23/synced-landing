@@ -1,6 +1,6 @@
 # Synced.page — Landing site
 
-Single-page Next.js 14 (App Router) landing for **Synced**, a pre-launch iOS training tracker. The wedge: linking pre-workout fuel to in-workout performance.
+Single-page Next.js 14 (App Router) landing for **Synced**, a pre-launch iOS training planner for climbers. The wedge: an adaptive weekly schedule that balances climbing, strength, and rest so users send harder without overtraining.
 
 The site exists to (a) establish the dark/teal brand and (b) drive waitlist signups via a Tally popup (form id `44PkRA`).
 
@@ -47,11 +47,11 @@ The hero is `components/ui/hero.tsx`. The footer is `components/ui/motion-footer
 ## Hero shape
 
 - Top nav: `synced.` wordmark on the left, `iPhone only` glass pill (Apple SVG + label) on the right. No nav links, no top-right Join waitlist button.
-- Three-line headline `FUEL.` / `TRAIN.` / `DECODE.` (DECODE in teal). Staggered indents on `md+`, all centered on mobile. Floor sizes are tuned so the text never crops at 375px.
+- Three-line headline `PLAN.` / `CLIMB.` / `SEND.` (SEND in teal). Staggered indents on `md+`, all centered on mobile. Floor sizes are tuned so the text never crops at 375px.
 - 3D drop-shadow on the headline scales by viewport: 6 layers on mobile, 14 layers on desktop, switched via styled-jsx `@media (min-width: 768px)` against the `.syn-headline` class.
-- Subheadline below DECODE: "You've been training without the data that actually matters." Constrained to `max-w-[300px]` on mobile, `md:max-w-[540px]`.
+- Subheadline below SEND: "A training planner for climbers. Your week, balanced for hard sessions, strength, and rest, so you show up fresh and send more." Constrained to `max-w-[300px]` on mobile, `md:max-w-[540px]`.
 - Two decorative cyan squiggle arrows + the spinning "JOIN THE WAITLIST" circular badge are **desktop-only** (`hidden md:block`). On mobile, a solid teal pill CTA "Join the waitlist" sits below the subheadline (`md:hidden`).
-- Bottom of hero: three light cream/white feature cards on a rounded white slab — `LOG FUEL`, `RATE THE SESSION`, `SEE THE PATTERN`. Each card has a small dark-pill visual (food log, dot row, bar chart). Connecting black arrows between cards 1→2 and 2→3 are `hidden md:block`.
+- Bottom of hero: three light cream/white feature cards on a rounded white slab — `PLAN THE WEEK`, `RATE THE CLIMB`, `SEE THE PROGRESS`. Each card has a small dark-pill visual (session log, dot row, bar chart). Connecting black arrows between cards 1→2 and 2→3 are `hidden md:block`.
 
 Every CTA in the hero (nav has no CTA; mobile pill; desktop spinning badge) calls `openWaitlist()` from `lib/tally.ts`.
 
@@ -59,8 +59,8 @@ Every CTA in the hero (nav has no CTA; mobile pill; desktop spinning badge) call
 
 - Cinematic curtain reveal: a `clipPath`-clipped wrapper over a `position: fixed` footer that scrolls into view.
 - Aurora glow + faint grid + giant background text `SYNCED` (parallaxed via GSAP `scrollTrigger`).
-- Marquee strip: `Coming soon to iOS · Eat. Train. Decode. · iPhone only · Cohort 1 open · Built for serious training`.
-- Heading `Ready to decode?` with a metallic gradient.
+- Marquee strip: `Coming soon to iOS · Plan. Climb. Send. · iPhone only · Cohort 1 open · Built for serious climbers`.
+- Heading `Ready to send?` with a metallic gradient.
 - Single magnetic glass pill `Join the waitlist` (Apple SVG, calls `openWaitlist()`), then secondary pills `Privacy Policy`, `Terms of Service`, `Support` (mailto `ubaydullanoorullah@gmail.com`). No Android pill, no "Crafted by" pill.
 - Bottom row: `© 2026 synced.page` on the left, back-to-top button on the right.
 

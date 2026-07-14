@@ -12,14 +12,14 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Synced. Train, fuel, decode the connection.",
+  title: "Synced. Plan the week. Send the project.",
   description:
-    "The first recovery tracker that links what you ate before a workout to how you felt and performed during it. iOS, launching soon.",
+    "A training planner built for climbers. Weekly schedules that balance climbing, strength, and rest so you show up fresh and send harder. iOS, launching soon.",
   metadataBase: new URL("https://synced.page"),
   openGraph: {
-    title: "Synced. Train, fuel, decode the connection.",
+    title: "Synced. Plan the week. Send the project.",
     description:
-      "Recovery and readiness for serious lifters, with a fuel x performance loop nobody else tracks.",
+      "A training planner for climbers. Weekly schedules that balance climbing, strength, and rest so you send harder.",
     url: "https://synced.page",
     siteName: "Synced",
     type: "website",

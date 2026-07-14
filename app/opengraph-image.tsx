@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
-export const alt = "Synced. Train, fuel, decode the connection.";
+export const alt = "Synced. Plan the week. Send the project.";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -44,9 +44,9 @@ export default function OG() {
             maxWidth: 900,
           }}
         >
-          Train hard. Fuel right.{" "}
-          <span style={{ color: "#00E5FF", fontStyle: "italic" }}>Decode</span>{" "}
-          the connection.
+          Plan the week. Get stronger.{" "}
+          <span style={{ color: "#00E5FF", fontStyle: "italic" }}>Send</span>{" "}
+          the project.
         </div>
       </div>
     ),

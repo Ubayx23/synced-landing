@@ -188,13 +188,13 @@ const MarqueeItem = () => (
   <div className="flex items-center space-x-12 px-6">
     <span>Coming soon to iOS</span>
     <span className="text-primary/60">{"✦"}</span>
-    <span>Eat. Train. Decode.</span>
+    <span>Plan. Climb. Send.</span>
     <span className="text-secondary/60">{"✦"}</span>
     <span>iPhone only</span>
     <span className="text-primary/60">{"✦"}</span>
     <span>Cohort 1 open</span>
     <span className="text-secondary/60">{"✦"}</span>
-    <span>Built for serious training</span>
+    <span>Built for serious climbers</span>
     <span className="text-primary/60">{"✦"}</span>
   </div>
 );
@@ -284,7 +284,7 @@ export function SyncedFooter() {
               ref={headingRef}
               className="footer-text-glow mb-12 text-center text-5xl font-black tracking-tighter md:text-8xl"
             >
-              Ready to decode?
+              Ready to send?
             </h2>
 
             <div ref={linksRef} className="flex w-full flex-col items-center gap-6">

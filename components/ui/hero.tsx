@@ -162,7 +162,7 @@ export const Component = () => {
                   fontSize: "clamp(3rem, 14vw, 160px)",
                 }}
               >
-                FUEL.
+                PLAN.
               </h1>
             </div>
 
@@ -174,7 +174,7 @@ export const Component = () => {
                   fontSize: "clamp(3.5rem, 17vw, 220px)",
                 }}
               >
-                TRAIN.
+                CLIMB.
               </h1>
             </div>
 
@@ -187,12 +187,12 @@ export const Component = () => {
                   color: ACCENT,
                 }}
               >
-                DECODE.
+                SEND.
               </h1>
             </div>
 
             <p className="relative z-10 mt-6 max-w-[300px] self-center text-center text-sm font-medium leading-[1.5] text-white/70 md:mt-8 md:max-w-[540px] md:text-lg">
-              You&apos;ve been training without the data that actually matters.
+              A training planner for climbers. Your week, balanced for hard sessions, strength, and rest, so you show up fresh and send more.
             </p>
 
             <div className="pt-8 md:hidden">
@@ -241,22 +241,22 @@ export const Component = () => {
           <FeatureCard
             title={
               <>
-                LOG
+                PLAN THE
                 <br />
-                FUEL
+                WEEK
               </>
             }
-            caption="Quick-tap what you ate. No macro counting."
+            caption="Drag climbs, hangs, and rest into place."
             visual={
               <div className="flex items-center gap-3 rounded-2xl bg-[#08090A] px-4 py-3 text-white shadow-lg">
                 <span
                   className="h-2.5 w-2.5 rounded-full"
                   style={{ backgroundColor: ACCENT }}
                 />
-                <span className="text-xs font-bold">chicken bowl</span>
+                <span className="text-xs font-bold">hangboard</span>
                 <span className="text-[10px] text-white/60">·</span>
                 <span className="text-[10px] font-mono text-white/70">
-                  7:42am
+                  Tue 7am
                 </span>
               </div>
             }
@@ -268,10 +268,10 @@ export const Component = () => {
               <>
                 RATE THE
                 <br />
-                SESSION
+                CLIMB
               </>
             }
-            caption="Thirty seconds after you train."
+            caption="Thirty seconds after every session."
             visual={
               <div className="flex items-center gap-2 rounded-full bg-[#08090A] px-5 py-3 shadow-lg">
                 {[0, 1, 2, 3, 4].map((i) => (
@@ -294,10 +294,10 @@ export const Component = () => {
               <>
                 SEE THE
                 <br />
-                PATTERN
+                PROGRESS
               </>
             }
-            caption="The foods that show up on your best days."
+            caption="The sessions that push your grade up."
             visual={
               <div className="relative flex items-end gap-1.5 rounded-2xl bg-[#08090A] px-5 py-4 shadow-lg">
                 {[14, 22, 12, 28, 18].map((h, i) => (
