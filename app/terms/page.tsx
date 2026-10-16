@@ -20,21 +20,23 @@ export default function TermsPage() {
         Terms of Service
       </h1>
       <p className="mt-2 text-sm text-syn-text-faint">
-        Last updated 4 May 2026.
+        Last updated 15 October 2026.
       </p>
 
       <section className="mt-10 space-y-6 text-syn-text-dim leading-relaxed">
         <p>
-          By using synced.page or signing up for the waitlist, you agree to
-          these terms. They are intentionally short. Synced is a pre-launch
+          By using synced.page, requesting beta access, or installing the beta,
+          you agree to these terms. They are intentionally short. Synced is a
           product run by one person and the legal surface is small.
         </p>
 
-        <h2 className="pt-4 text-xl font-semibold text-syn-text">The waitlist</h2>
+        <h2 className="pt-4 text-xl font-semibold text-syn-text">The beta</h2>
         <p>
-          Joining the waitlist is free and creates no obligation on either
-          side. We do not promise a launch date, a feature set, or a specific
-          price. We will email you when there is something real to share.
+          Requesting beta access is free and creates no obligation on either
+          side. Beta builds are pre-release software: features may change or
+          disappear, things may break, and data logged in a beta build may not
+          carry over. We do not promise a launch date, a feature set, or a
+          specific price.
         </p>
 
         <h2 className="pt-4 text-xl font-semibold text-syn-text">

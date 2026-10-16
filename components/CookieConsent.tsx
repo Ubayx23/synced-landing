@@ -34,7 +34,7 @@ export function CookieConsent() {
     >
       <p className="leading-relaxed">
         synced.page stores a small amount of local data on your device to
-        remember if you have joined the waitlist. No tracking, no ads.{" "}
+        remember if you have requested beta access. No tracking, no ads.{" "}
         <Link
           href="/privacy"
           className="font-semibold text-syn-cyan underline-offset-4 hover:underline"

@@ -1,7 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { TallyScript } from "@/components/tally/TallyScript";
-import { WaitlistListener } from "@/components/tally/WaitlistListener";
+import { BetaFormListener } from "@/components/tally/BetaFormListener";
 import { CookieConsent } from "@/components/CookieConsent";
 import "./globals.css";
 
@@ -14,12 +16,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Synced. Plan the week. Send the project.",
   description:
-    "A training planner built for climbers. Weekly schedules that balance climbing, strength, and rest so you show up fresh and send harder. iOS, launching soon.",
+    "A training planner built for climbers. Weekly schedules that balance climbing, strength, and rest so you show up fresh and send harder. Now in beta on iPhone.",
   metadataBase: new URL("https://synced.page"),
   openGraph: {
     title: "Synced. Plan the week. Send the project.",
     description:
-      "A training planner for climbers. Weekly schedules that balance climbing, strength, and rest so you send harder.",
+      "A training planner for climbers. Weekly schedules that balance climbing, strength, and rest so you send harder. Request the iOS beta.",
     url: "https://synced.page",
     siteName: "Synced",
     type: "website",
@@ -39,11 +41,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`dark ${inter.variable}`}>
+    <html lang="en" className={`dark ${inter.variable} ${GeistSans.variable} ${GeistMono.variable}`}>
       <body className="font-sans antialiased">
         <main>{children}</main>
         <TallyScript />
-        <WaitlistListener />
+        <BetaFormListener />
         <CookieConsent />
       </body>
     </html>

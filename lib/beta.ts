@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 
-export const STORAGE_KEY = "synced_waitlist_submitted";
-export const SUBMITTED_EVENT = "synced:waitlisted";
+export const STORAGE_KEY = "synced_beta_requested";
+export const SUBMITTED_EVENT = "synced:beta-requested";
 
 export function hasSubmitted(): boolean {
   if (typeof window === "undefined") return false;
@@ -24,7 +24,7 @@ export function markSubmitted(): void {
   window.dispatchEvent(new CustomEvent(SUBMITTED_EVENT));
 }
 
-export function useWaitlistSubmitted(): boolean {
+export function useBetaRequested(): boolean {
   const [submitted, setSubmitted] = useState(false);
 
   useEffect(() => {

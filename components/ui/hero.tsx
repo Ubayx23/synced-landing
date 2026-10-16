@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "motion/react";
-import { openWaitlist } from "@/lib/tally";
+import { openBetaForm } from "@/lib/tally";
 
 const ACCENT = "#00E5FF";
 const SHADOW_LAYER = "#003B47";
@@ -64,8 +64,8 @@ const ArrowBlack = () => (
 const CircularBadge = () => (
   <button
     type="button"
-    onClick={openWaitlist}
-    aria-label="Join the waitlist"
+    onClick={openBetaForm}
+    aria-label="Request beta access"
     className="relative flex h-28 w-28 -rotate-12 cursor-pointer items-center justify-center rounded-full border-[3px] border-black/10 shadow-xl transition-transform hover:scale-105 md:h-36 md:w-36"
     style={{ backgroundColor: ACCENT }}
   >
@@ -80,8 +80,8 @@ const CircularBadge = () => (
           className="text-[11px] font-black uppercase tracking-[0.18em]"
           fill="black"
         >
-          <textPath href="#circlePath" startOffset="0%">
-            JOIN THE WAITLIST · JOIN THE WAITLIST ·
+          <textPath href="#circlePath" startOffset="0%" textLength="222" lengthAdjust="spacing">
+            TRY THE BETA · TRY THE BETA ·
           </textPath>
         </text>
       </svg>
@@ -137,7 +137,7 @@ export const Component = () => {
 
         <span
           className="inline-flex shrink-0 items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.08] px-2.5 py-1 text-[11px] font-medium uppercase tracking-wide text-white/70 backdrop-blur-sm"
-          aria-label="iPhone only"
+          aria-label="Now in beta on iPhone"
         >
           <svg
             viewBox="0 0 24 24"
@@ -147,7 +147,7 @@ export const Component = () => {
           >
             <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.56.04 2.87.67 3.55 1.76-3.13 1.77-2.62 5.92.35 7.14-.65 1.58-1.57 3.1-2.57 4.03zm-3.21-14.7c-.55 1.4-1.89 2.37-3.25 2.28.09-1.5 1.05-2.82 2.38-3.4 1.25-.57 2.66-.41 3.25.04-.15.35-.26.72-.38 1.08z" />
           </svg>
-          <span>iPhone only</span>
+          <span>Beta on iPhone</span>
         </span>
       </nav>
 
@@ -198,11 +198,11 @@ export const Component = () => {
             <div className="pt-8 md:hidden">
               <button
                 type="button"
-                onClick={openWaitlist}
+                onClick={openBetaForm}
                 className="inline-flex items-center justify-center rounded-full px-7 py-3 text-sm font-bold text-[#08090A] shadow-[0_8px_24px_rgba(0,229,255,0.35)]"
                 style={{ backgroundColor: ACCENT }}
               >
-                Join the waitlist
+                Get the beta
               </button>
             </div>
           </div>
@@ -246,18 +246,21 @@ export const Component = () => {
                 WEEK
               </>
             }
-            caption="Drag climbs, hangs, and rest into place."
+            caption="Climbs, lifts and rest, planned ahead."
             visual={
-              <div className="flex items-center gap-3 rounded-2xl bg-[#08090A] px-4 py-3 text-white shadow-lg">
-                <span
-                  className="h-2.5 w-2.5 rounded-full"
-                  style={{ backgroundColor: ACCENT }}
-                />
-                <span className="text-xs font-bold">hangboard</span>
-                <span className="text-[10px] text-white/60">·</span>
-                <span className="text-[10px] font-mono text-white/70">
-                  Tue 7am
-                </span>
+              <div className="flex items-center gap-4 rounded-full bg-[#08090A] px-5 py-3 text-white shadow-lg">
+                {(["climb", "lift", "rest", "climb", "lift"] as const).map((k, i) => (
+                  <span key={i} className="flex flex-col items-center gap-1.5">
+                    <span className="font-geist-mono text-[10px] text-white/60">{"MTWTF"[i]}</span>
+                    <span
+                      className="h-2.5 w-2.5 rounded-full"
+                      style={{
+                        backgroundColor: k === "climb" ? ACCENT : k === "rest" ? "#3A3A3E" : "transparent",
+                        border: k === "lift" ? `1.5px solid ${ACCENT}` : "none",
+                      }}
+                    />
+                  </span>
+                ))}
               </div>
             }
             connector
@@ -271,19 +274,16 @@ export const Component = () => {
                 CLIMB
               </>
             }
-            caption="Thirty seconds after every session."
+            caption="Your top send every week, and every new best."
             visual={
-              <div className="flex items-center gap-2 rounded-full bg-[#08090A] px-5 py-3 shadow-lg">
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <span
-                    key={i}
-                    className="h-3 w-3 rounded-full"
-                    style={{
-                      backgroundColor: i < 4 ? ACCENT : "transparent",
-                      border: i < 4 ? "none" : `1.5px solid ${ACCENT}`,
-                    }}
-                  />
-                ))}
+              <div className="flex items-center gap-3 rounded-2xl bg-[#08090A] px-4 py-3 shadow-lg">
+                <span className="font-geist-mono text-2xl font-bold" style={{ color: ACCENT }}>
+                  V5
+                </span>
+                <svg viewBox="0 0 64 24" className="h-6 w-16" fill="none" aria-hidden>
+                  <path d="M2 20 L14 16 L26 16 L38 10 L50 10 L62 3" stroke={ACCENT} strokeWidth="2" strokeLinejoin="round" />
+                  <circle cx="62" cy="3" r="2.5" fill={ACCENT} />
+                </svg>
               </div>
             }
             connector
@@ -297,20 +297,13 @@ export const Component = () => {
                 PROGRESS
               </>
             }
-            caption="The sessions that push your grade up."
+            caption="Top sets per lift, with an estimated max."
             visual={
-              <div className="relative flex items-end gap-1.5 rounded-2xl bg-[#08090A] px-5 py-4 shadow-lg">
-                {[14, 22, 12, 28, 18].map((h, i) => (
-                  <span
-                    key={i}
-                    className="w-2.5 rounded-sm"
-                    style={{ backgroundColor: ACCENT, height: `${h}px` }}
-                  />
-                ))}
-                <span
-                  className="absolute -bottom-2 left-8 h-5 w-5 rotate-45"
-                  style={{ backgroundColor: ACCENT }}
-                />
+              <div className="flex items-center gap-2 rounded-2xl bg-[#08090A] px-4 py-3 font-geist-mono text-xs text-white shadow-lg">
+                <span className="text-white/60">155×6</span>
+                <span className="text-white/40">→</span>
+                <span style={{ color: ACCENT }}>155×9</span>
+                <span className="ml-1 font-bold text-[#22C55E]">+16</span>
               </div>
             }
           />

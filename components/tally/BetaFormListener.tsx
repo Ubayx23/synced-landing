@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { markSubmitted } from "@/lib/waitlist";
+import { markSubmitted } from "@/lib/beta";
 import { TALLY_FORM_ID } from "@/lib/tally";
 
 type LooseRecord = Record<string, unknown>;
@@ -21,7 +21,7 @@ function isSubmissionPayload(data: unknown): boolean {
   return false;
 }
 
-export function WaitlistListener() {
+export function BetaFormListener() {
   useEffect(() => {
     const onMessage = (e: MessageEvent) => {
       if (isSubmissionPayload(e.data)) markSubmitted();

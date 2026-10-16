@@ -64,6 +64,8 @@ const config: Config = {
       },
       fontFamily: {
         sans: ["var(--font-inter)", "system-ui", "sans-serif"],
+        geist: ["var(--font-geist-sans)", "system-ui", "sans-serif"],
+        "geist-mono": ["var(--font-geist-mono)", "ui-monospace", "monospace"],
       },
       letterSpacing: {
         wordmark: "-0.04em",

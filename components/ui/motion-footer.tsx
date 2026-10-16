@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { cn } from "@/lib/utils";
-import { openWaitlist } from "@/lib/tally";
+import { openBetaForm } from "@/lib/tally";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -186,13 +186,13 @@ MagneticButton.displayName = "MagneticButton";
 
 const MarqueeItem = () => (
   <div className="flex items-center space-x-12 px-6">
-    <span>Coming soon to iOS</span>
+    <span>Now in beta on iOS</span>
     <span className="text-primary/60">{"✦"}</span>
     <span>Plan. Climb. Send.</span>
     <span className="text-secondary/60">{"✦"}</span>
     <span>iPhone only</span>
     <span className="text-primary/60">{"✦"}</span>
-    <span>Cohort 1 open</span>
+    <span>TestFlight invites open</span>
     <span className="text-secondary/60">{"✦"}</span>
     <span>Built for serious climbers</span>
     <span className="text-primary/60">{"✦"}</span>
@@ -292,7 +292,7 @@ export function SyncedFooter() {
                 <MagneticButton
                   as="button"
                   type="button"
-                  onClick={openWaitlist}
+                  onClick={openBetaForm}
                   className="footer-glass-pill group flex items-center gap-3 rounded-full px-10 py-5 text-sm font-bold text-foreground md:text-base"
                 >
                   <svg
@@ -303,7 +303,7 @@ export function SyncedFooter() {
                   >
                     <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.04 2.26-.79 3.59-.76 1.56.04 2.87.67 3.55 1.76-3.13 1.77-2.62 5.92.35 7.14-.65 1.58-1.57 3.1-2.57 4.03zm-3.21-14.7c-.55 1.4-1.89 2.37-3.25 2.28.09-1.5 1.05-2.82 2.38-3.4 1.25-.57 2.66-.41 3.25.04-.15.35-.26.72-.38 1.08z" />
                   </svg>
-                  Join the waitlist
+                  Get the iOS beta
                 </MagneticButton>
               </div>
 

@@ -3,7 +3,7 @@ import Link from "next/link";
 export const metadata = {
   title: "Privacy Policy. Synced.",
   description:
-    "How Synced handles your information. Pre-launch waitlist, kept simple.",
+    "How Synced handles your information. Beta signups, kept simple.",
 };
 
 export default function PrivacyPage() {
@@ -20,14 +20,14 @@ export default function PrivacyPage() {
         Privacy Policy
       </h1>
       <p className="mt-2 text-sm text-syn-text-faint">
-        Last updated 4 May 2026.
+        Last updated 15 October 2026.
       </p>
 
       <section className="mt-10 space-y-6 text-syn-text-dim leading-relaxed">
         <p>
-          Synced is a one-person, pre-launch project. This policy covers
-          synced.page (the marketing site) and the iOS app, which is not yet
-          publicly available.
+          Synced is a one-person project. This policy covers synced.page (the
+          marketing site) and the iOS app, which is currently in beta through
+          Apple TestFlight and not yet on the App Store.
         </p>
 
         <h2 className="pt-4 text-xl font-semibold text-syn-text">
@@ -35,14 +35,16 @@ export default function PrivacyPage() {
         </h2>
         <p>
           On the marketing site we collect only the information you submit to
-          the waitlist form: typically an email address and any optional fields
+          the beta access form: typically an email address and any optional fields
           you choose to fill in. The form is hosted by Tally, which acts as the
           processor on our behalf. We do not run third-party analytics,
           advertising trackers, or session recorders on synced.page.
         </p>
         <p>
-          The iOS app, when it launches, will store your fuel and training logs
-          locally on your device by default. Any data that syncs off-device for
+          The iOS app stores your climbing and training logs. While in beta,
+          Apple may share crash reports, basic device diagnostics, and any
+          feedback you submit through TestFlight with us, as described in
+          Apple&apos;s TestFlight terms. Any data that syncs off-device for
           backup or analysis will be tied to a user account you create, and
           will be covered by an updated version of this policy at that time.
         </p>
@@ -51,16 +53,16 @@ export default function PrivacyPage() {
           How we use it
         </h2>
         <p>
-          Your waitlist email is used to contact you about the launch, beta
-          invites, and major product news. Nothing else. We do not sell, rent,
-          or share waitlist contacts.
+          Your email is used to send your TestFlight invite, beta updates, and
+          major product news. Nothing else. We do not sell, rent, or share
+          your contact details.
         </p>
 
         <h2 className="pt-4 text-xl font-semibold text-syn-text">
           Your choices
         </h2>
         <p>
-          You can ask to be removed from the waitlist at any time by emailing
+          You can ask to be removed from the beta list at any time by emailing
           the address below. We will delete your record within a reasonable
           window and confirm by reply.
         </p>
@@ -70,8 +72,8 @@ export default function PrivacyPage() {
         </h2>
         <p>
           synced.page uses two small pieces of local storage:{" "}
-          <code className="text-syn-cyan">synced_waitlist_submitted</code> to
-          remember whether you have already joined the waitlist on this
+          <code className="text-syn-cyan">synced_beta_requested</code> to
+          remember whether you have already requested beta access on this
           browser, and{" "}
           <code className="text-syn-cyan">synced_cookie_consent</code> to
           remember that you have dismissed the cookie banner. No other cookies
